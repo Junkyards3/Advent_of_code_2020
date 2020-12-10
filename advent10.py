@@ -8,7 +8,6 @@ f.close()
 t.sort()
 t.append(t[-1]+3)
 t.insert(0,0)
-
 n1 = 0
 n3 = 0
 nb_occur = dict()
@@ -24,11 +23,13 @@ for i in range(len(t)-1) :
 		curr = 1
 print(n1*n3)
 
-nb_arr = 1
-ls = sorted(list(nb_occur.keys()))
-nb_perms = [1,1,2]
-for i in range(1,ls[-1]+1) :
-	if i > len(nb_perms) :
-		nb_perms.append(nb_perms[-1]+nb_perms[-2]+nb_perms[-3])
-	nb_arr *= nb_perms[i-1]**nb_occur[i]
-print(nb_arr)
+tv = [1]
+for x in range(1,len(t)) :
+	p = x-1
+	v = t[x]
+	r = 0
+	while p >= 0 and t[p] >= v-3 :
+		r += tv[p]
+		p -= 1
+	tv.append(r)
+print(tv[-1])
